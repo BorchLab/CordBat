@@ -1,3 +1,5 @@
+# test script for CordBat.R - testcases are NOT comprehensive!
+
 ## -----------------------------------------------------------
 ## 0.  Skip if heavy dependencies are missing ----------------
 ## -----------------------------------------------------------
