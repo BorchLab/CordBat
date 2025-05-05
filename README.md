@@ -1,4 +1,8 @@
 # CordBat
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/BorchLab/CordBat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/BorchLab/CordBat/actions/workflows/R-CMD-check.yaml)
+  [![Codecov test coverage](https://codecov.io/gh/BorchLab/CordBat/graph/badge.svg)](https://app.codecov.io/gh/BorchLab/CordBat)
+  <!-- badges: end -->
 
 ## Concordance-Based Batch Effect Correction for Large-Scale Metabolomics 
 

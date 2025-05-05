@@ -4,8 +4,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Fanjing", "Guo", email = "33320200155796@stu.xmu.edu.cn", role = "aut"),
     person("Nick", "Borcherding", email = "ncborch@gmail.com", role = c("aut", "cre")), 
-    person("Breanna", "Guppy", email = "breanna-guppy@uiowa.edu", role = "aut"))
-)
+    person("Breanna", "Guppy", email = "breanna-guppy@uiowa.edu", role = "aut")))
 Description: Implements batch effect correction and graphical lasso methods for high-dimensional data, including the Stability Approach to Regularization Selection (StARS) and community detection methods. The package provides efficient and scalable solutions for handling batch effects in biological and other high-dimensional datasets.
 License: MIT + file LICENSE
 Encoding: UTF-8
