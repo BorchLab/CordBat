@@ -18,6 +18,7 @@ Imports:
     mixOmics,
     stats
 Suggests: 
+    BiocStyle,
     ggplot2,
     knitr, 
     rmarkdown,
