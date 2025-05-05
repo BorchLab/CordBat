@@ -17,7 +17,6 @@
 #' set.seed(123)
 #' X <- matrix(rnorm(100), 10, 10)
 #' result <- graphicalLasso(X, rho = 0.1)
-#' str(result)
 #' 
 #' @importFrom stats cov
 #' @importFrom utils capture.output

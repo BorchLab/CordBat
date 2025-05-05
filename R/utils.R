@@ -100,7 +100,7 @@ CDfgL <- function(V, beta_i, u, rho, maxIter = 200, print.detail){
 # -------------------------------------------------------------
 # update correction coefficients a and b
 # -------------------------------------------------------------
-update.CorrectCoef <- function(X0.glist, X1.glist, Theta.list, 
+update_CorrectCoef <- function(X0.glist, X1.glist, Theta.list, 
                                a.i, b.i, penal.ksi, penal.gamma, print.detail) {
   G <- length(X0.glist)
   p <- ncol(X0.glist[[1]])
