@@ -15,9 +15,11 @@ BEgLasso(
 )
 }
 \arguments{
-\item{X0.glist}{A list of matrices where each matrix corresponds to a batch in group 0 (reference batch).}
+\item{X0.glist}{A list of matrices where each matrix corresponds to a batch 
+in group 0 (reference batch).}
 
-\item{X1.glist}{A list of matrices where each matrix corresponds to a batch in group 1 (batch to be corrected).}
+\item{X1.glist}{A list of matrices where each matrix corresponds to a batch 
+in group 1 (batch to be corrected).}
 
 \item{penal.rho}{Regularization parameter for the graphical lasso.}
 
@@ -44,7 +46,6 @@ Group Graphical Lasso (GGM) approach. It estimates correction coefficients
 and applies them iteratively to adjust for batch effects in multi-group datasets.
 }
 \examples{
-# Example usage with simulated data
 set.seed(123)
 X0.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))
 X1.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))

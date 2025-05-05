@@ -19,6 +19,7 @@
 #' X <- matrix(rnorm(100), 10, 10)
 #' StARS(X, b = 7, M = 50)
 #'
+#' @export
 StARS <- function(X, b, M, print.detail = TRUE) {
   set.seed(42)
   N <- nrow(X)

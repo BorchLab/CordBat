@@ -16,10 +16,11 @@
 #' @examples
 #' set.seed(123)
 #' X <- matrix(rnorm(100), 10, 10)
-#' result <- graphicalLasso(X, rho = 0.1)
+#' result <- graphicalLasso(X, rho = 0.1, print.detail = FALSE)
 #' 
 #' @importFrom stats cov
 #' @importFrom utils capture.output
+#' @export
 graphicalLasso <- function(X, rho, print.detail) {
   N <- nrow(X)
   p <- ncol(X)

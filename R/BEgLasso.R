@@ -29,6 +29,7 @@
 #' res <- BEgLasso(X0.glist, X1.glist, 0.1, 0.1, 0.1, 1e-4, print.detail = FALSE)
 #'
 #' @importFrom utils capture.output
+#' @export
 BEgLasso <- function(X0.glist, 
                      X1.glist, 
                      penal.rho, 

@@ -14,6 +14,7 @@
 #' str(communities)
 #'
 #'@importFrom stats cor
+#'@export
 getAllCom <- function(X) {
   N <- nrow(X)  # Number of samples
   p <- ncol(X)  # Number of features

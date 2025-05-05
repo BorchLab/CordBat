@@ -27,7 +27,6 @@ using the graphical lasso algorithm with an L1-penalized covariance estimation a
 \examples{
 set.seed(123)
 X <- matrix(rnorm(100), 10, 10)
-result <- graphicalLasso(X, rho = 0.1)
-str(result)
+result <- graphicalLasso(X, rho = 0.1, print.detail = FALSE)
 
 }
