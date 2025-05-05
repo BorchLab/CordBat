@@ -33,7 +33,7 @@ selfoldforCV <- function(N){
 # soft threshold
 # ------------------
 soft <- function(x, lambda){
-  s <- sign(x) * max(abs(x) - lambda, 0)
+  s <- sign(x) * pmax(abs(x) - lambda, 0)
   return(s)
 }
 
