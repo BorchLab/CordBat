@@ -4,8 +4,10 @@
 #' Group Graphical Lasso (GGM) approach. It estimates correction coefficients
 #' and applies them iteratively to adjust for batch effects in multi-group datasets.
 #'
-#' @param X0.glist A list of matrices where each matrix corresponds to a batch in group 0 (reference batch).
-#' @param X1.glist A list of matrices where each matrix corresponds to a batch in group 1 (batch to be corrected).
+#' @param X0.glist A list of matrices where each matrix corresponds to a batch 
+#' in group 0 (reference batch).
+#' @param X1.glist A list of matrices where each matrix corresponds to a batch 
+#' in group 1 (batch to be corrected).
 #' @param penal.rho Regularization parameter for the graphical lasso.
 #' @param penal.ksi Regularization parameter for coefficient update.
 #' @param penal.gamma Additional penalty parameter for coefficient update.
@@ -21,12 +23,10 @@
 #' }
 #' 
 #' @examples
-#' # Example usage with simulated data
 #' set.seed(123)
 #' X0.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))
 #' X1.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))
-#' res <- BEgLasso(X0.glist, X1.glist, 0.1, 0.1, 0.1, 1e-4)
-#' str(res)
+#' res <- BEgLasso(X0.glist, X1.glist, 0.1, 0.1, 0.1, 1e-4, print.detail = FALSE)
 #'
 #' @importFrom utils capture.output
 BEgLasso <- function(X0.glist, 
@@ -179,7 +179,7 @@ BEgLasso <- function(X0.glist,
     if (all(as.vector(finished.gmat))) break
     
     # Update coefficients
-    coef.update <- update.CorrectCoef(X0.glist, X1.glist, Theta.list, coef.a, 
+    coef.update <- update_CorrectCoef(X0.glist, X1.glist, Theta.list, coef.a, 
                                       coef.b, penal.ksi, penal.gamma, print.detail)
     coef.a <- coef.update$coef.a
     coef.b <- coef.update$coef.b

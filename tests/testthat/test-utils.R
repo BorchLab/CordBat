@@ -44,17 +44,17 @@ test_that("CDfgL solves identity‑matrix sub‑problem exactly", {
 })
 
 ## -----------------------------------------------------------
-## 4.  update.CorrectCoef  ----------------------------------
+## 4.  update_CorrectCoef  ----------------------------------
 ## -----------------------------------------------------------
-skip_if_not(exists("update.CorrectCoef"), "update.CorrectCoef not present")
+skip_if_not(exists("update_CorrectCoef"), "update_CorrectCoef not present")
 
-test_that("update.CorrectCoef returns sane dimensions and small changes on identical data", {
+test_that("update_CorrectCoef returns sane dimensions and small changes on identical data", {
   set.seed(123)
   G <- 1; n <- 12; p <- 4
   X0 <- list(matrix(rnorm(n * p), n, p))
   X1 <- X0                                   # identical batches
   Theta.list <- list(diag(p))                # identity precision
-  res <- update.CorrectCoef(
+  res <- update_CorrectCoef(
     X0, X1, Theta.list,
     a.i = rep(1, p), b.i = rep(0, p),
     penal.ksi = 0.1, penal.gamma = 0.1,

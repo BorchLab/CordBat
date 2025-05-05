@@ -13,8 +13,8 @@ simulate_batches <- function(G = 2, n = 15, p = 6) {
 #  Sanity‑check that required helpers are available; if not, skip ---
 # ------------------------------------------------------------------
 skip_if_not(
-  all(vapply(c("CDfgL", "update.CorrectCoef"), exists, logical(1))),
-  message = "Helper functions CDfgL / update.CorrectCoef not found"
+  all(vapply(c("CDfgL", "update_CorrectCoef"), exists, logical(1))),
+  message = "Helper functions CDfgL / update_CorrectCoef not found"
 )
 
 # 1 ────────────────────────────────────────────────────────────────

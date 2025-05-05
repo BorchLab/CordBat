@@ -48,7 +48,6 @@ and applies them iteratively to adjust for batch effects in multi-group datasets
 set.seed(123)
 X0.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))
 X1.glist <- list(matrix(rnorm(100), 10, 10), matrix(rnorm(100), 10, 10))
-res <- BEgLasso(X0.glist, X1.glist, 0.1, 0.1, 0.1, 1e-4)
-str(res)
+res <- BEgLasso(X0.glist, X1.glist, 0.1, 0.1, 0.1, 1e-4, print.detail = FALSE)
 
 }
