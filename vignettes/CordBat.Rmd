@@ -24,6 +24,7 @@ vignette: >
 ```{r}
 library(CordBat)
 library(ggplot2)
+library(dplyr)
 ```
 
 # Generate Synthetic Data
@@ -153,65 +154,47 @@ p_group <- ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
 print(p_batch)
 print(p_group)
 ```
-The PCA shows clear separation of groups before the batch effect is applied.
-## Apply Batch Effect to Data
+## Running CordBat
 
 ```{r}
-# Define batch effect again
-batch_effects <- list(
-  "Ref"    = 0.00,   # No effect
-  "Batch1" = -0.25,  # 25% decrease
-  "Batch2" = -0.15,  # 15% decrease
-  "Batch3" =  0.12,  # 12% increase
-  "Batch4" = -0.08,  # 8% decrease
-  "Batch5" =  0.20   # 20% increase
+met_cols      <- grep("^Metabolite", names(cordbat_example))
+X_mat      <- as.matrix(log2(cordbat_example[met_cols]))   # log-transform
+batch_vec  <- cordbat_example$Batch
+group_vec  <- cordbat_example$Group
+
+## choose the reference batch — here the QC / pooled reference
+fit <- CordBat(
+  X          = X_mat,
+  batch      = batch_vec,
+  group      = group_vec,
+  ref.batch  = "Ref",
+  grouping   = FALSE,        
+  print.detail = FALSE
 )
 
-# Apply batch effect to metabolite columns
-set.seed(42)  # For reproducibility of batch variation
-
-for (batch in levels(cordbat_example$Batch)) {
-  batch_rows <- which(cordbat_example$Batch == batch)
-  
-  # Simulate variability around the intended mean multiplier
-  batch_multiplier <- matrix(
-    rnorm(length(batch_rows) * num_metabolites,
-          mean = 1 + batch_effects[[batch]],
-          sd = 0.04),
-    nrow = length(batch_rows),
-    ncol = num_metabolites
-  )
-  
-  # Multiply metabolite values by batch multiplier
-  cordbat_example[batch_rows, metabolite_cols] <- 
-    as.matrix(cordbat_example[batch_rows, metabolite_cols]) * batch_multiplier
-}
-
+corrected_mat <- fit$X.cor         
 ```
 
-## Visualize Batch and Group Effect with PCA
+## Visualizing Correction
 
 ```{r}
-# Identify the columns with metabolite measurements
-metabolite_cols <- grep("Metabolite", names(cordbat_example))
-
-# Perform PCA on the metabolite data; scaling is recommended
-pca_res <- prcomp(cordbat_example[, metabolite_cols], scale. = TRUE)
+# Perform PCA on the metabolite data
+new_pca_res <- prcomp(2^corrected_mat, scale. = TRUE)
 
 # Combine PCA results with the metadata
 pca_df <- data.frame(
   SampleID = cordbat_example$SampleID,
   Batch    = cordbat_example$Batch,
   Group    = cordbat_example$Group,
-  PC1      = pca_res$x[, 1],
-  PC2      = pca_res$x[, 2]
+  PC1      = new_pca_res$x[, 1],
+  PC2      = new_pca_res$x[, 2]
 )
 
 # Plot PCA colored by Batch
 p_batch <- ggplot(pca_df, aes(x = PC1, y = PC2, color = Batch)) +
   geom_point(size = 3, alpha = 0.8) +
   theme_minimal() +
-  labs(title = "PCA of Batch and Group Effect - Colored by Batch",
+  labs(title = "PCA of Group Effect - Colored by Batch",
        x = "Principal Component 1",
        y = "Principal Component 2")
 
@@ -219,12 +202,16 @@ p_batch <- ggplot(pca_df, aes(x = PC1, y = PC2, color = Batch)) +
 p_group <- ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
   geom_point(size = 3, alpha = 0.8) +
   theme_minimal() +
-  labs(title = "PCA of Batch and Group Effect - Colored by Group",
+  labs(title = "PCA of Group Effect - Colored by Group",
        x = "Principal Component 1",
        y = "Principal Component 2")
 
 print(p_batch)
 print(p_group)
 ```
-After applying the batch effect, The PCA shows clusters based on batch instead of group.
+## Session Info
+
+```{r}
+sessionInfo()
+```
 
